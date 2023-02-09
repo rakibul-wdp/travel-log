@@ -1,15 +1,18 @@
+import TravelLogMap from "@/components/TravelLogMap";
 import { TravelLogs } from "@/models/TravelLog/TravelLogs";
+import Link from "next/link";
 
 export default async function Home() {
   const logs = await TravelLogs.find().toArray();
 
   return (
-    <main>
-      <h1>Hello World...!!!</h1>
-      <h2>{logs.length}</h2>
-      {logs.map((log) => (
-        <div>{log.title}</div>
-      ))}
+    <main className="w-full h-full">
+      <TravelLogMap logs={logs} />
+      <div className="fixed top-2 right-2 z-[999]">
+        <Link href="/add" className="btn btn-info">
+          Add Travel Log
+        </Link>
+      </div>
     </main>
   );
 }
